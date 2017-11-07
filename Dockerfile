@@ -5,9 +5,8 @@ EXPOSE 993
 
 
 
-RUN apt-get update -q -q && \
-    apt-get --yes install rsyslog \
-                          dovecot-core \
+RUN apt-get update -q -q && apt-get upgrade -y && \
+    apt-get --yes install dovecot-core \
                           dovecot-imapd \
                           dovecot-mysql \
                           dovecot-lmtpd
@@ -17,7 +16,7 @@ VOLUME /var/log/dovecot/
 VOLUME /var/mail/
 
 
-CMD ls -al /etc/ && ls -al /etc/dovecot/ &&  dovecot -F
+CMD dovecot -F
 #Run in foreground: https://wiki2.dovecot.org/Tools/Dovecot
 
 
